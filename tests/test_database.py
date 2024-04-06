@@ -1,15 +1,19 @@
 from praktikum.database import Database
+from unittest.mock import Mock
 import pytest
+from data import Data
 
 
 class TestDatabaseCollector:
 
-    def test_get_available_buns(self):
-        database = Database()
-        bans = database.available_buns()
-        assert bans[0].get_name() == "black bun"
 
-    def test_get_available_ingredients(self):
-        database = Database()
-        ingredient = database.available_ingredients()
-        assert ingredient[0].get_type() == 'SAUCE' and ingredient[0].get_name() == "hot sauce"
+    @pytest.mark.parametrize('index,name', Data.index_bun_name)
+    def test_get_available_buns(self, database_collector, index, name):
+        database_collector = Database()
+        bans = database_collector.available_buns()
+        assert bans[index].get_name() == name
+
+    @pytest.mark.parametrize('index,name', Data.index_souce_name)
+    def test_get_available_ingredients_by_name(self, database_collector, index, name):
+        ingredient = database_collector.available_ingredients()
+        assert ingredient[index].get_name() == name
