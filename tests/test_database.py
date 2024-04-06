@@ -9,7 +9,6 @@ class TestDatabaseCollector:
 
     @pytest.mark.parametrize('index,name', Data.index_bun_name)
     def test_get_available_buns(self, database_collector, index, name):
-        database_collector = Database()
         bans = database_collector.available_buns()
         assert bans[index].get_name() == name
 
