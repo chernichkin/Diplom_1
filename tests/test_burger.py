@@ -1,5 +1,6 @@
 import pytest
 from unittest.mock import Mock
+from data import Data
 
 
 class TestBurgerCollector:
@@ -65,6 +66,6 @@ class TestBurgerCollector:
         mock_ingredient_one.get_type.return_value = 'SAUCE'
         burger_collector.add_ingredient(mock_ingredient_one)
 
-        assert "krendel" in burger_collector.get_receipt() and f'Price: 1000' in burger_collector.get_receipt()
+        assert burger_collector.get_receipt() == Data.expected_receipt
 
 
